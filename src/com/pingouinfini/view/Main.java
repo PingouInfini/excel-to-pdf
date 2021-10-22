@@ -1,12 +1,11 @@
-package sample;
+package com.pingouinfini.view;
 
 
+import com.pingouinfini.controller.CreateExcelFileTask;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -63,6 +62,7 @@ public class Main extends Application {
         final Separator separatorup = new Separator();
         final Separator separatordown = new Separator();
 
+        Text blankspace = new Text();
 
         status.setText("Veuillez sélectionner une option");
 
@@ -72,41 +72,31 @@ public class Main extends Application {
         buttonpdf.setOnAction(event -> {
             List<File> files = fileChooser.showOpenMultipleDialog(primaryStage);
 
+            status.setText("Transformation d'un ou plusieurs fichier(s) PDF en fichier(s) Excel");
             for (File file : files) {
-
+                System.out.println(file.getName());
+                status.setText("Traitement fichier : " + file.getName());
                 //buttonpdf.setDisable(true);
                 //progressBar.setProgress(0);
                 //progressIndicator.setProgress(0);
 
                 // Create a Task.
                 //createExcelFileTask = new CreateExcelFileTask();
-                createExcelFile(file, false);
+                createExcelFile(file);
             }
         });
 
         buttonFolder.setOnAction(event -> {
             File selectedDirectory = directoryChooser.showDialog(primaryStage);
 
-            for (File file : Objects.requireNonNull(selectedDirectory.listFiles())) {
-                String extension = getExtension(file.getName()).isPresent() ? getExtension(file.getName()).get() : "";
-                if (!"pdf".equals(extension))
-                    continue;
-                createExcelFile(file, true);
-            }
+            transformFilesInDirectory(selectedDirectory);
         });
-
-
-
-
-
-
-
 
         VBox root = new VBox();
         root.setPadding(new Insets(10));
         root.setSpacing(5);
 
-        root.getChildren().addAll(buttonpdf, buttonFolder, separatorup, status, progressBar ,progressIndicator ,separatordown);
+        root.getChildren().addAll(buttonpdf, buttonFolder, blankspace, separatorup, status, separatordown);
 
         Scene scene = new Scene(root, 400, 200);
 
@@ -115,10 +105,23 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    private void createExcelFile(File file, boolean isDirectory) {
+    private void transformFilesInDirectory(File file) {
+        for (File currentFile : Objects.requireNonNull(file.listFiles())) {
+
+            if (currentFile.isDirectory())
+                transformFilesInDirectory(currentFile);
+
+            String extension = getExtension(currentFile.getName()).isPresent() ? getExtension(currentFile.getName()).get() : "";
+            if (!"pdf".equals(extension))
+                continue;
+            createExcelFile(currentFile);
+        }
+    }
+
+    private void createExcelFile(File file) {
         String filename = file.getName();
         String filePath = file.getAbsolutePath();
-        String fileDirectory = isDirectory ? file.getAbsolutePath() : file.getParent();
+        String fileDirectory = file.getParent();
         String fileNameWithoutExtension = filename.substring(0, filename.length() - 4);
         String excelFilePAth = fileDirectory + "\\" + fileNameWithoutExtension + ".xls";
 
