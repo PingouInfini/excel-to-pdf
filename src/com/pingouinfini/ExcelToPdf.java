@@ -36,7 +36,7 @@ public class ExcelToPdf {
             } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ignored) {
             }
 
-            JFrame frame = new JFrame("PDF to Excel v1.0");
+            JFrame frame = new JFrame("PDF to Excel v1.0.0");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setLayout(new BorderLayout());
             frame.add(new MainPane());
@@ -113,6 +113,11 @@ public class ExcelToPdf {
             status.setBackground(Color.LIGHT_GRAY);
             gbc.gridy++;
             add(status, gbc);
+
+            JPanel p = new JPanel();
+            JSplitPane sl = new JSplitPane(SwingConstants.HORIZONTAL, p, p);
+            gbc.gridy++;
+            add(sl, gbc);
 
         }
 

@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="extractpdfexcel-0.1">
     <CLASSES>
-      <root url="jar://$USER_HOME$/Downloads/extractpdfexcel-0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/extractpdfexcel-0.1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

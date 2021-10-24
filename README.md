@@ -18,7 +18,7 @@ java -jar ExcelToPDF.jar
 
 Using launch4j
 
-0. (if exists) Unzip ExcelToPDF\target\jre\lib\modules.zip
+0. (if exists) Unzip ExcelToPDF\target\jre\lib\modules.zip with 'extract here' (DO NOT EXTRACT AS FOLDER !)
 0. (if exists) Remove 'modules.zip'
 1. Load configuration using file 'l4jconfig.xml'
 2. Make sure 'target/jre' directory is present
