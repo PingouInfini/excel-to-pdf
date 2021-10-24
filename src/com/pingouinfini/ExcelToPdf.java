@@ -36,7 +36,7 @@ public class ExcelToPdf {
             } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ignored) {
             }
 
-            JFrame frame = new JFrame("PDF to Excel");
+            JFrame frame = new JFrame("PDF to Excel v1.0");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setLayout(new BorderLayout());
             frame.add(new MainPane());
@@ -107,7 +107,7 @@ public class ExcelToPdf {
             add(pbProgress, gbc);
 
             status = new JTextField();
-            status.setText("init");
+            status.setText("En attente d'un choix utilisateur...");
             status.setEnabled(false);
             status.setBorder(new LineBorder(Color.GRAY, 1));
             status.setBackground(Color.LIGHT_GRAY);
@@ -256,7 +256,8 @@ public class ExcelToPdf {
             // force check if its a number
             Float.parseFloat(block.getFormattedText());
             createdCell.setCellType(HSSFCell.CELL_TYPE_NUMERIC);
-            createdCell.setCellValue(Float.parseFloat(block.getFormattedText()));
+            Double numericValue = Double.parseDouble(block.getFormattedText());
+            createdCell.setCellValue(numericValue);
         } catch (NumberFormatException e) {
             //not float
             createdCell.setCellValue(block.getFormattedText());
