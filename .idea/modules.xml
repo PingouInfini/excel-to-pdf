@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ExcelToPDF.iml" filepath="$PROJECT_DIR$/ExcelToPDF.iml" />
+      <module fileurl="file://$PROJECT_DIR$/excel-to-pdf.iml" filepath="$PROJECT_DIR$/excel-to-pdf.iml" />
     </modules>
   </component>
 </project>
